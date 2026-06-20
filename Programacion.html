@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+   <link rel="icon" href="https://descofinido.gieovannyfrias.com/Imagenes/Logo.webp" type="image/x-icon">
+  <!--  google-->
+  <title>Calendario de Entrevistas descofinido</title>
+
+<!--  canonical web-->
+  <link rel="canonical" href="https://descofinido.gieovannyfrias.com"/>
+
+<!-- Título que verá Google -->
+<meta name="title" content="Calendario de Entrevistas descofinido">
+<meta name="description" content="Enterate de nuestras entrevistas programadas en cada momento.">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="paranormal, entidades, podcast, ovni, anormal"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Calendario de Entrevistas descofinido">
+  <meta property="og:description" content="Enterate de nuestras entrevistas programadas en cada momento.">
+  <meta property="og:image" content="https://descofinido.gieovannyfrias.com/Imagenes/Logo.webp">
+  <meta property="og:url" content="https://descofinido.gieovannyfrias.com/Programacion">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calendario de Entrevistas descofinido">
+  <meta name="twitter:description" content="Enterate de nuestras entrevistas programadas en cada momento.">
+<meta name="twitter:image" content="https://descofinido.gieovannyfrias.com/Imagenes/Logo.webp">
+  
+  
+</head>
+<body>
+  <div class="calenday">
+  <div class="calendar">
+    <!-- Generamos 31 días -->
+    <div class="day" onclick="showDetails(1)">1</div>
+    <div class="day" onclick="showDetails(2)">2</div>
+    <div class="day" onclick="showDetails(3)">3</div>
+        <div class="day" onclick="showDetails(4)">4</div>
+    <div class="day" onclick="showDetails(5)">5</div>
+    <div class="day" onclick="showDetails(6)">6</div>
+    <div class="day" onclick="showDetails(7)">7</div>
+    <div class="day" onclick="showDetails(8)">8</div>
+    <div class="day" onclick="showDetails(9)">9</div>
+    <div class="day" onclick="showDetails(10)">10</div>
+    <div class="day" onclick="showDetails(11)">11</div>
+    <div class="day" onclick="showDetails(12)">12</div>
+    <div class="day" onclick="showDetails(13)">13</div>
+    <div class="day" onclick="showDetails(14)">14</div>
+    <div class="day" onclick="showDetails(15)">15</div>
+    <div class="day" onclick="showDetails(16)">16</div>
+    <div class="day" onclick="showDetails(17)">17</div>
+    <div class="day" onclick="showDetails(18)">18</div>
+    <div class="day" onclick="showDetails(19)">19</div>
+    <div class="day" onclick="showDetails(20)">20</div>
+    <div class="day" onclick="showDetails(21)">21</div>
+    <div class="day" onclick="showDetails(22)">22</div>
+    <div class="day" onclick="showDetails(23)">23</div>
+    <div class="day" onclick="showDetails(24)">24</div>
+    <div class="day" onclick="showDetails(25)">25</div>
+    <div class="day" onclick="showDetails(26)">26</div>
+    <div class="day" onclick="showDetails(27)">27</div>
+    <div class="day" onclick="showDetails(28)">28</div>
+    <div class="day" onclick="showDetails(29)">29</div>
+    <div class="day" onclick="showDetails(30)">30</div>
+  
+    <!-- ... hasta el 31 -->
+    <div class="day" onclick="showDetails(31)">31</div>
+  </div>
+
+  <div class="details" id="details">
+    <h2>Programación de Entrevistas</h2>
+    <p><strong>Fecha:</strong> <span id="fecha"></span></p>
+    <p><strong>Título:</strong> <span id="titulo"></span></p>
+    <p><strong>Hora:</strong> <span id="hora"></span></p>
+    <ul class="invitados" id="invitados"></ul>
+      <!-- Aquí se insertará el reproductor -->
+  <div  class="video-card" id="player" style="margin-top:20px;"></div>
+  </div>
+  </div>
+  <style>
+           * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    body{
+      zoom:75%;
+  background: #0d0d0d;
+color: white;
+    }
+ .calenday {
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row; /* en desktop lado a lado */
+  min-height: 100vh;
+}
+
+/* Calendario */
+.calendar {
+  width: 40%;
+  background: rgba(255,255,255,0.05);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  border-right: 2px solid rgba(255,255,255,0.2);
+}
+
+.day {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.day:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.05);
+}
+
+/* Card lateral */
+.details {
+  width: 50%;
+  padding: 30px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  animation: slideIn 0.5s forwards;
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+h2 {
+  color: #ffd700;
+}
+.invitados {
+  list-style: none;
+  padding: 0;
+}
+.invitados li {
+  background: rgba(255,255,255,0.1);
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+.guest-name {
+  font-weight: bold;
+  color: #ffd700;
+}
+.guest-role {
+  font-style: italic;
+  color: #ddd;
+}
+
+/* Video premium */
+.video-card {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.video-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.6);
+}
+.video-card iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+  border-radius: 10px;
+}
+
+/* 🔹 Adaptación móvil */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column; /* apilar calendario y detalles */
+  }
+  .calenday{
+    flex-wrap: wrap;
+  }
+  .calendar {
+    width: 100%;
+    grid-template-columns: repeat(5, 1fr); /* menos columnas para móviles */
+    border-right: none;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+  }
+  .details {
+    width: 100%;
+    padding: 20px;
+  }
+  .video-card iframe {
+    height: 200px; /* más compacto en móvil */
+  }
+}
+
+  </style>
+  <script src="src/components/Header-Footer/header-footer-main.js" defer></script>
+
+  <script>
+    const programas = {
+      1: {
+        fecha: "1 Junio 2026",
+        titulo: "Innovación y Futuro",
+        hora: "17:00 hrs",
+        invitados: [
+          {nombre:"Dr. Luis Gómez", rol:"Robótica avanzada"},
+          {nombre:"Mtra. Sofía Díaz", rol:"Educación STEM"}
+        ],
+              video: `<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID_1" 
+                title="Podcast Día 1" frameborder="0" allowfullscreen></iframe>`
+      },
+      2: {
+        fecha: "2 Junio 2026",
+        titulo: "Salud y Sociedad",
+        hora: "18:00 hrs",
+        invitados: [
+          {nombre:"Dra. Elena Ruiz", rol:"Medicina preventiva"},
+          {nombre:"Lic. Pedro Morales", rol:"Políticas de salud"}
+        ]
+      },
+      3: {
+        fecha: "3 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      4: {
+        fecha: "4 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      5: {
+        fecha: "5 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      6: {
+        fecha: "6 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+        7: {
+        fecha: "7 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+        8: {
+        fecha: "8 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+        9: {
+        fecha: "9 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+        10: {
+        fecha: "10 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+        11: {
+        fecha: "11 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+        12: {
+        fecha: "12 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+        13: {
+        fecha: "13 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+        14: {
+        fecha: "14 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },  
+      15: {
+        fecha: "15 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      16: {
+        fecha: "16 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      17: {
+        fecha: "17 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      18: {
+        fecha: "18 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      19: {
+        fecha: "19 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      20: {
+        fecha: "20 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+            21: {
+        fecha: "21 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+            22: {
+        fecha: "22 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+            23: {
+        fecha: "23 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+            24: {
+        fecha: "24 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+            25: {
+        fecha: "25 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+            26: {
+        fecha: "26 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+             27: {
+        fecha: "27 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+             28: {
+        fecha: "28 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+             29: {
+        fecha: "29 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+             30: {
+        fecha: "30 Junio 2026",
+        titulo: "Arte y Cultura",
+        hora: "19:00 hrs",
+        invitados: [
+          {nombre:"Arq. Marta Sánchez", rol:"Patrimonio cultural"},
+          {nombre:"Artista Juan Herrera", rol:"Arte contemporáneo"}
+        ]
+      },
+      // ... puedes definir hasta el 31 con diferentes datos
+      31: {
+        fecha: "31 Junio 2026",
+        titulo: "Cierre del Mes",
+        hora: "20:00 hrs",
+        invitados: [
+          {nombre:"Ing. Carlos Pérez", rol:"Innovación tecnológica"},
+          {nombre:"Lic. Ana Torres", rol:"Políticas públicas"},
+          {nombre:"Arq. Laura Sánchez", rol:"Urbanismo sostenible"}
+        ]
+      }
+    };
+
+    function showDetails(day) {
+      const programa = programas[day];
+      if (!programa) return;
+      document.getElementById("fecha").innerText = programa.fecha;
+      document.getElementById("titulo").innerText = programa.titulo;
+      document.getElementById("hora").innerText = programa.hora;
+      const invitadosList = document.getElementById("invitados");
+      invitadosList.innerHTML = "";
+      programa.invitados.forEach(inv => {
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="guest-name">${inv.nombre}</span> — <span class="guest-role">${inv.rol}</span>`;
+        invitadosList.appendChild(li);
+      });
+          document.getElementById("player").innerHTML = programa.video;
+      document.getElementById("details").style.display = "flex";
+    }
+  </script>
+</body>
+</html>
