@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+   <link rel="icon" href="https://descofinido.gieovannyfrias.com/Imagenes/Logo.webp" type="image/x-icon">
+    <title>No disponible</title>
+  
+</head>
+<body>
+
+    <!-- Mensajes de fondo detectables con el movimiento del ratón -->
+    <div class="hidden-message hm-1">NO DEBISTE DETENERTE AQUÍ</div>
+    <div class="hidden-message hm-2">EL CONTENEDOR ESTÁ VACÍO. ELLOS NO.</div>
+
+    <canvas id="ashCanvas"></canvas>
+
+    <div class="container">
+        <span class="status-badge">Acceso Suspendido // Temporalmente</span>
+        <h1 id="title">CONTENIDO NO DISPONIBLE</h1>
+        <p id="typed-text"></p>
+        <a href="/" class="btn-premium">Evacuar Zona</a>
+    </div>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #030205;
+            color: #ffffff;
+            font-family: 'Times New Roman', Times, serif; /* Estética gótica/documental */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            /* Linterna premium interactiva basada en variables CSS */
+            background-image: radial-gradient(
+                circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(40, 20, 50, 0.6) 0%,
+                rgba(3, 2, 5, 1) 100%
+            );
+        }
+
+        /* Lienzo interactivo de fondo */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 700px;
+            padding: 40px;
+            z-index: 2;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            background: rgba(3, 2, 5, 0.85);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #8a2be2; /* Púrpura místico */
+            margin-bottom: 20px;
+            display: block;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        p {
+            font-size: 1.15rem;
+            color: #a0a0a0;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            min-height: 60px; /* Evita saltos en el efecto mecanografiado */
+        }
+
+        /* Mensajes ocultos que la linterna revela sutilmente */
+        .hidden-message {
+            position: absolute;
+            font-size: 0.75rem;
+            color: rgba(138, 43, 226, 0.15);
+            font-family: 'Courier New', Courier, monospace;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hm-1 { top: 15%; left: 10%; }
+        .hm-2 { bottom: 20%; right: 12%; }
+
+        /* Botón elegante y espectral */
+        .btn-premium {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #e0e0e0;
+            padding: 14px 35px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-premium:hover::before {
+            left: 100%;
+        }
+
+        .btn-premium:hover {
+            border-color: #8a2be2;
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+            text-shadow: 0 0 5px #ffffff;
+        }
+    </style>
+    <script>
+        // --- 1. EFECTO LINTERNA (Seguimiento de Ratón) ---
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            document.body.style.setProperty('--mouse-x', `${x}%`);
+            document.body.style.setProperty('--mouse-y', `${y}%`);
+        });
+
+        // --- 2. TEXTO MECANOGRAFIADO ESPECTRAL ---
+        const message = "Este sector de la plataforma ha entrado en un estado temporalmente paranormal. Las variables locales han dejado de responder y el almacenamiento se encuentra sellado por lo desconocido con demonios. No intentes forzar la entrada... hay cosas atrapadas dentro que buscan un puente de salida para entrar al mundo fisico del espiriual o astral.";
+        const textElement = document.getElementById('typed-text');
+        let index = 0;
+
+        function typeEffect() {
+            if (index < message.length) {
+                textElement.innerHTML += message.charAt(index);
+                index++;
+                // Velocidad de escritura orgánica ligeramente aleatoria
+                setTimeout(typeEffect, Math.random() * 30 + 20);
+            }
+        }
+        // Iniciar escritura retrasada
+        setTimeout(typeEffect, 500);
+
+        // --- 3. CANVAS: PARTICULAS DE CENIZA ESPIRITUAL ---
+        const canvas = document.getElementById('ashCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedY = Math.random() * -1 - 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                // Si sale de la pantalla, reaparece abajo
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(180, 150, 200, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 60; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
