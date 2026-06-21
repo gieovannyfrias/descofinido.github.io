@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+   <link rel="icon" href="https://descofinido.gieovannyfrias.com/Imagenes/Logo.webp" type="image/x-icon">
+    <title>Descofinido</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ff3333;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+          zoom:75%;
+        }
+
+        /* Efecto de estática de TV de fondo */
+        .static-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                rgba(255, 255, 255, 0.05) 1px,
+                rgba(255, 255, 255, 0.05) 2px
+            );
+            opacity: 0.4;
+            pointer-events: none;
+            animation: staticShift 0.2s infinite;
+            z-index: 1;
+        }
+
+        /* Contenedor principal */
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            z-index: 2;
+            animation: glitch 4s infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px #550000;
+        }
+
+        .icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .glitch-text {
+            color: #ff3333;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* Botón inútil con estilo antiguo */
+        .btn-retry {
+            background-color: transparent;
+            border: 1px solid #ff3333;
+            color: #ff3333;
+            padding: 10px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-retry:hover {
+            background-color: #ff3333;
+            color: #050505;
+            box-shadow: 0 0 15px #ff3333;
+        }
+
+        /* Animaciones */
+        @keyframes staticShift {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100px; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes glitch {
+            0%, 95%, 100% { transform: skew(0deg); filter: blur(0); }
+            96% { transform: skew(-4deg); filter: blur(1px); opacity: 0.8; }
+            97% { transform: skew(6deg); }
+            98% { transform: skew(-2deg); filter: blur(0); }
+            99% { transform: skew(3deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="static-bg"></div>
+
+    <div class="error-container">
+        <div class="icon">👁</div>
+        <h1>SIN RED DESCONOCIDO</h1>
+        <p>
+            La señal se ha desvanecido por completo. El cable de internet no responde. 
+            Estás desconectado del mundo exterior... pero ya no estás solo en el servidor.
+            <span class="glitch-text">ALGUIEN SE QUEDÓ CONTIGO EN LA LÍNEA.</span>
+        </p>
+          <a href="/" class="retry"> <button class="btn-retry">Reintentar</button></a>
+    </div>
+
+</body>
+</html>
