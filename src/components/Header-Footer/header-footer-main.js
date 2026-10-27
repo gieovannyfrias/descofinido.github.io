@@ -3,7 +3,7 @@
 // Inyectar el header
 document.body.insertAdjacentHTML("afterbegin", `
 <header class="navbar">
-  <h1 class="logo">Descofinido</h1>
+  <h1 class="logo"><img src="https://descofinido.gieovannyfrias.com/Imagenes/Logo_transparente.webp" style="width: 100px; height: 60px;">Descofinido</h1>
   <nav>
     <ul class="menu" id="menu">
       <li><a href="index.html">Inicio</a></li>
@@ -25,7 +25,7 @@ document.body.insertAdjacentHTML("beforeend", `
 <footer class="footer">
   <div class="footer-container">
     <div class="footer-logo">
-      <h2>Descofinido</h2>
+      <h2><img src="https://descofinido.gieovannyfrias.com/Imagenes/Logo_transparente.webp" style="width: 100px; height: 60px;">Descofinido</h2>
       <p>Explorando lo desconocido con pasión y creatividad.</p>
     </div>
     <div class="footer-links">
@@ -102,6 +102,9 @@ style.textContent = `
     0 0 40px #0ff,
     0 0 80px #0ff;
   animation: flicker 2s infinite alternate;
+display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 @keyframes flicker {
@@ -215,6 +218,9 @@ style.textContent = `
 .footer-logo h2 {
   margin: 0;
   font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .footer-links ul,
